@@ -3,3 +3,33 @@
 body {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Gdot";
+  src: url("/fonts/GFS_Didot/GFSDidot-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Noto";
+  src: url("/public/fonts/Noto_Serif_Armenian/NotoSerifArmenian-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: "Dzeragir";
+  src: url("/fonts/SHK_Dzeragir.otf");
+}
+
+.gdot-font {
+  font-family: "Gdot";
+  font-weight: 300;
+}
+
+.noto-font {
+  font-family: "Noto";
+  font-weight: 400;
+}
+
+.dzeragir-font{
+  font-family: "Dzeragir";
+  font-weight: 100;
+}
