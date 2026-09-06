@@ -1,5 +1,4 @@
 import Section from "@/components/ui/section/Section";
-// @ts-ignore
 import Heading from "@/components/ui/typography/Heading";
 import Paragraph from "@/components/ui/typography/Paragraph";
 import Image from "next/image";
