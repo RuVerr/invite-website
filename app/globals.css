@@ -19,6 +19,157 @@ body {
   src: url("/fonts/SHK_Dzeragir.otf");
 }
 
+/* ==========================================================
+   IBM Plex Serif — Заголовки и акцентные элементы
+   ========================================================== */
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-MediumItalic.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* ==========================================================
+   IBM Plex Serif — Заголовки и акцентные элементы
+   ========================================================== */
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/IBM_Plex_Serif/IBMPlexSerif-MediumItalic.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* ==========================================================
+   IBM Plex Sans — Основной текст
+   ========================================================== */
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* ==========================================================
+   Utility Classes
+   ========================================================== */
+
+/* Имена молодожёнов */
+.ibm-heading {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+}
+
+/* Акцентные заголовки (если нужен курсив) */
+.ibm-heading-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Заголовки секций:
+   "Наша история"
+   "Детали"
+   "Dress Code"
+   "Локация"
+*/
+.ibm-title {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 300;
+}
+
+/* Основной текст:
+   история пары,
+   описание,
+   приглашение,
+   пожелания
+*/
+.ibm-text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 300;
+}
+
+/* Второстепенный текст:
+   дата,
+   время,
+   адрес,
+   подписи,
+   описание dress code
+*/
+.ibm-text-medium {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+
+}
+
+/* Кнопки:
+   RSVP,
+   Open Maps,
+   Calendar,
+   Contact
+*/
+.ibm-button {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
 .gdot-font {
   font-family: "Gdot";
   font-weight: 300;
@@ -33,3 +184,5 @@ body {
   font-family: "Dzeragir";
   font-weight: 100;
 }
+
+
