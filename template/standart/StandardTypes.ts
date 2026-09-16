@@ -22,3 +22,32 @@ export interface StandardHeroTypes {
     };
   };
 }
+
+export interface StandardOurStoryTypes {
+  ourStoryHeading: string;
+  ourStoryParagraph: string;
+  ourStoryImageSrc: string;
+  ourStoryImageSrc2: string;
+}
+
+// export interface StandardTheDayTypes {
+//   theWedding: {
+//     theDayIcons: string;
+//     theDayTime: string[];
+//     theDayHeadings: string[];
+//     theDayLocationsOrInfo: string[];
+//     theDayCityOrInfo: string[];
+//   };
+// }
+
+interface theDayItem {
+  theDayIcons: string;
+  theDayTime: string;
+  theDayHeadings: string;
+  theDayLocationsOrInfo: string;
+  theDayCityOrInfo: string;
+}
+
+export interface StandardTheDayTypes {
+  theDayData: theDayItem[];
+}
