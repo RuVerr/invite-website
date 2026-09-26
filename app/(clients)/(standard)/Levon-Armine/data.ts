@@ -1,6 +1,8 @@
+const heroImage: string = "/images/standard-images/heroes/levon-armine.png";
+
 export const data = {
   hero: {
-    standardHeroImageSrc: "/images/standard-images/heroes/levon-armine.png",
+    standardHeroImageSrc: heroImage,
     logoHeroes: {
       man: "Լ",
       woman: "Ա"
@@ -30,17 +32,6 @@ export const data = {
     ourStoryImageSrc: "/images/standard-images/heroes/levon-armine22.png",
     ourStoryImageSrc2: "/images/standard-images/heroes/levon-armine33.png"
   },
-  // theDay: {
-  //   theDayIcons: [
-  //     "/images/standard-images/icons/rings.svg",
-  //     "/images/standard-images/icons/glass.svg",
-  //     "/images/standard-images/icons/music.svg"
-  //   ],
-  //   theDayTime: ["12:00", "17:00", "22:00"],
-  //   theDayHeadings: ["Պսակադրություն", "Տոնական երեկո", "Երեկոյի շարունակությունը"],
-  //   theDayLocationsOrInfo: ["Սուրբ Գայանե", "The Felice", "Երաժշտություն և պար"],
-  //   theDayCityOrInfo: ["Երևան", "Երևան", "լավ տրամադրություն"]
-  // }
 
   theDay: {
     theDayData: [
@@ -66,15 +57,19 @@ export const data = {
         theDayCityOrInfo: "բարձր տրամադրություն"
       }
     ]
-  }
+  },
 
-  // theDay: {
-  //   theWedding: {
-  //     theDayIcons: "/Images/standard-images/icons/rings.svg",
-  //     theDayTime: "12:00",
-  //     theDayHeadings: "Պսակադրություն",
-  //     theDayLocationsOrInfo: "Սուրբ Գայանե",
-  //     theDayCityOrInfo: "Երևան"
-  //   }
-  // }
+  countDown: {
+    CountDownYear: "2030",
+    CountDownMonth: "02",
+    CountDownDay: "30"
+  },
+
+  dressColor: {
+    dressColors: ["#f4f0e8", "#dfc5bd", "#aeb8ad", "#cbb8a9", "#d0b9a7"]
+  },
+
+  footer: {
+    footerBackgroundImage: heroImage
+  }
 };

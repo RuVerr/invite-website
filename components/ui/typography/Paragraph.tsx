@@ -1,8 +1,13 @@
-import React from "react";
+import React, { RefObject } from "react";
 interface ParagraphProp {
   children: string;
   className?: string;
+  paragraphRef?: React.Ref<HTMLParagraphElement | null>;
 }
-export default function Paragraph({ children, className = "" }: ParagraphProp) {
-  return <p className={className }>{children}</p>;
+export default function Paragraph({ children, paragraphRef, className = "" }: ParagraphProp) {
+  return (
+    <p ref={paragraphRef} className={className}>
+      {children}
+    </p>
+  );
 }

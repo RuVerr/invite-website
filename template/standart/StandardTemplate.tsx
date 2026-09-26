@@ -6,6 +6,9 @@ import StandardHero from "./standard-components/StandardHero";
 import { StandardTypesData } from "./StandardTypesData";
 import StandardOurStory from "./standard-components/StandardOurStory";
 import TheDay from "./standard-components/StandardTheDay";
+import StandardCountdown from "./standard-components/StandardCountdown";
+import StandardDressCode from "./standard-components/StandardDressCode";
+import Footer from "@/components/ui/footer/Footer";
 
 interface StandardTemplateProp {
   data: StandardTypesData;
@@ -17,6 +20,9 @@ export default function StandardTemplate({ data }: StandardTemplateProp) {
       <StandardHero data={data.hero} />
       <StandardOurStory data={data.ourStory} />
       <TheDay data={data.theDay} />
+      <StandardCountdown data={data.countDown}/>
+      <StandardDressCode data={data.dressColor} />
+      <Footer data={data.footer} />
     </main>
   );
 }

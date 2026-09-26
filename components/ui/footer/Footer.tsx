@@ -72,16 +72,6 @@ export default function Footer({ data }: FooterProp) {
             >
               Telegram
             </Link>
-
-            {/* <span className="hidden h-1 w-1 rounded-full bg-white/60 sm:block" /> */}
-
-            {/* <Link
-              href="https://wa.me/..."
-              target="_blank"
-              className="ibm-text text-xs sm:text-sm uppercase tracking-[0.12em] text-white transition-opacity hover:opacity-70"
-            >
-              WhatsApp
-            </Link> */}
           </div>
 
           <p

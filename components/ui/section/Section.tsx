@@ -6,5 +6,5 @@ interface SectionProp {
 }
 
 export default function Section({ children, className }: SectionProp) {
-  return <section className={`relative h-svh overflow-hidden ${className}`}>{children}</section>;
+  return <section className={`relative overflow-hidden ${className}`}>{children}</section>;
 }

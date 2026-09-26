@@ -30,16 +30,6 @@ export interface StandardOurStoryTypes {
   ourStoryImageSrc2: string;
 }
 
-// export interface StandardTheDayTypes {
-//   theWedding: {
-//     theDayIcons: string;
-//     theDayTime: string[];
-//     theDayHeadings: string[];
-//     theDayLocationsOrInfo: string[];
-//     theDayCityOrInfo: string[];
-//   };
-// }
-
 interface theDayItem {
   theDayIcons: string;
   theDayTime: string;
@@ -50,4 +40,18 @@ interface theDayItem {
 
 export interface StandardTheDayTypes {
   theDayData: theDayItem[];
+}
+
+export interface StandardCountdownTypes {
+  CountDownYear: string;
+  CountDownMonth: string;
+  CountDownDay: string;
+}
+
+export interface StandardDressCodeTypes {
+  dressColors: string[];
+}
+
+export interface FooterType {
+  footerBackgroundImage: string;
 }

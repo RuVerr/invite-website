@@ -6,7 +6,7 @@ interface HeadingProp {
   level: headingType;
   children: React.ReactNode;
   className: string;
-  headingRef?: RefObject<HTMLHeadingElement | null>;
+  headingRef?: React.Ref<HTMLHeadingElement | null>;
 }
 
 export default function Heading({ level: Heading, children, headingRef, className = "" }: HeadingProp) {
