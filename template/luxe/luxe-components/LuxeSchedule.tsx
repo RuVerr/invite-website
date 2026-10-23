@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Section from "@/components/ui/section/Section";
 import LuxeWavesSections from "./LuxeWavesSections";
 import Heading from "@/components/ui/typography/Heading";
@@ -15,6 +16,11 @@ export default function LuxeSchedule() {
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const timeLineRef = useRef<HTMLDivElement | null>(null);
   const eventIconRefs = useRef<HTMLDivElement[]>([]);
+  const circleTimeRefs = useRef<HTMLSpanElement[]>([]);
+  const timeRefs = useRef<HTMLSpanElement[]>([]);
+  const timeInfoRefs = useRef<HTMLSpanElement[]>([]);
+  const timeInfoTwoRefs = useRef<HTMLSpanElement[]>([]);
+  const ourDayRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     if (
@@ -22,9 +28,15 @@ export default function LuxeSchedule() {
       !sectionNumberRef.current ||
       !headingRef.current ||
       !timeLineRef.current ||
-      !eventIconRefs.current.length
+      !eventIconRefs.current.length ||
+      !circleTimeRefs.current.length ||
+      !timeRefs.current.length ||
+      !timeInfoRefs.current.length ||
+      !timeInfoTwoRefs.current.length ||
+      !ourDayRef.current
     )
       return;
+
     const ctx = gsap.context(() => {
       const masterTL = gsap.timeline({
         defaults: { opacity: 0, ease: "power2.inOut" },
@@ -39,7 +51,44 @@ export default function LuxeSchedule() {
         .from(sectionNumberRef.current, { x: -20, duration: 0.5 })
         .from(headingRef.current, { scale: 9, duration: 1.5 })
         .from(timeLineRef.current, { width: "0%", duration: 0.7 })
-        .from(eventIconRefs.current, { y: -10, duration: 0.5, stagger: 0.2 }, "<");
+        .from(eventIconRefs.current, { y: -10, duration: 0.5, stagger: 0.2 }, "<")
+        .from(circleTimeRefs.current, { y: 10, scale: 1.6, duration: 0.5, stagger: 0.2 }, "<")
+        .from(timeRefs.current, { y: -20, duration: 1, stagger: 0.2 }, "<")
+        .from(timeInfoRefs.current, { y: -20, scale: 0.9, rotate: 5, duration: 1, stagger: 0.2 }, "<")
+        .from(timeInfoTwoRefs.current, { scale: 0.1, duration: 1.3, stagger: 0.3 }, "<")
+        .from(ourDayRef.current, { y: 20, duration: 1 }, "<");
+
+      const value = timeRefs.current.map((el) => {
+        const [hour, minute] = el.textContent.trim().split(":").map(Number);
+        return {
+          hour,
+          minute
+        };
+      });
+
+      timeRefs.current.forEach((el, index) => {
+        const { hour, minute } = value[index];
+        const counter = { totalMinute: 0 };
+
+        const targetMinute = hour * 60 + minute;
+
+        masterTL.to(
+          counter,
+          {
+            totalMinute: targetMinute,
+            duration: 4,
+            stagger: 0.3,
+            onUpdate: () => {
+              const total = Math.floor(counter.totalMinute);
+              const currentHour = Math.floor(total / 60);
+              const currentMinute = total % 60;
+
+              el.textContent = `${String(currentHour).padStart(2, "0")}:` + `${String(currentMinute).padStart(2, "0")}`;
+            }
+          },
+          "<"
+        );
+      });
     });
 
     return () => ctx.revert();
@@ -50,6 +99,12 @@ export default function LuxeSchedule() {
       sectionId="schedule"
       className="relative pb-[30px] overflow-hidden bg-[#171511] text-[#eee7dc]"
     >
+      <Image
+        src={"/images/luxe-images/bg/schedule4.png"}
+        alt=""
+        fill
+        className="object-cover object-right object-scale-down"
+      />
       <Container>
         <div className="relative mx-auto max-w-[1600px] px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-24 xl:px-20">
           {/* Заголовок секции */}
@@ -102,15 +157,45 @@ export default function LuxeSchedule() {
                     </svg>
                   </div>
 
-                  <span className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]" />
+                  <span
+                    ref={(el) => {
+                      if (el && !circleTimeRefs.current.includes(el)) {
+                        circleTimeRefs.current.push(el);
+                      }
+                    }}
+                    className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]"
+                  />
 
-                  <span className="ibm-heading text-2xl sm:text-[28px]">16:00</span>
+                  <span
+                    ref={(el) => {
+                      if (el && !timeRefs.current.includes(el)) {
+                        timeRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-heading text-2xl sm:text-[28px]"
+                  >
+                    16:00
+                  </span>
 
-                  <span className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs">
+                  <span
+                    ref={(el) => {
+                      if (el && !timeInfoRefs.current.includes(el)) {
+                        timeInfoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs"
+                  >
                     Сбор гостей
                   </span>
 
-                  <Paragraph className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45">
+                  <Paragraph
+                    paragraphRef={(el) => {
+                      if (el && !timeInfoTwoRefs.current.includes(el)) {
+                        timeInfoTwoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45"
+                  >
                     Встречаемся и готовимся к празднику
                   </Paragraph>
                 </div>
@@ -145,15 +230,45 @@ export default function LuxeSchedule() {
                     </svg>
                   </div>
 
-                  <span className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]" />
+                  <span
+                    ref={(el) => {
+                      if (el && !circleTimeRefs.current.includes(el)) {
+                        circleTimeRefs.current.push(el);
+                      }
+                    }}
+                    className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]"
+                  />
 
-                  <span className="ibm-heading text-2xl sm:text-[28px]">17:00</span>
+                  <span
+                    ref={(el) => {
+                      if (el && !timeRefs.current.includes(el)) {
+                        timeRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-heading text-2xl sm:text-[28px]"
+                  >
+                    17:00
+                  </span>
 
-                  <span className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs">
+                  <span
+                    ref={(el) => {
+                      if (el && !timeInfoRefs.current.includes(el)) {
+                        timeInfoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs"
+                  >
                     Церемония
                   </span>
 
-                  <Paragraph className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45">
+                  <Paragraph
+                    paragraphRef={(el) => {
+                      if (el && !timeInfoTwoRefs.current.includes(el)) {
+                        timeInfoTwoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45"
+                  >
                     Самый важный момент нашей истории
                   </Paragraph>
                 </div>
@@ -180,15 +295,45 @@ export default function LuxeSchedule() {
                     </svg>
                   </div>
 
-                  <span className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]" />
+                  <span
+                    ref={(el) => {
+                      if (el && !circleTimeRefs.current.includes(el)) {
+                        circleTimeRefs.current.push(el);
+                      }
+                    }}
+                    className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]"
+                  />
 
-                  <span className="ibm-heading text-2xl sm:text-[28px]">18:30</span>
+                  <span
+                    ref={(el) => {
+                      if (el && !timeRefs.current.includes(el)) {
+                        timeRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-heading text-2xl sm:text-[28px]"
+                  >
+                    18:30
+                  </span>
 
-                  <span className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs">
+                  <span
+                    ref={(el) => {
+                      if (el && !timeInfoRefs.current.includes(el)) {
+                        timeInfoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs"
+                  >
                     Банкет
                   </span>
 
-                  <Paragraph className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45">
+                  <Paragraph
+                    paragraphRef={(el) => {
+                      if (el && !timeInfoTwoRefs.current.includes(el)) {
+                        timeInfoTwoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45"
+                  >
                     Ужин, музыка и тёплые поздравления
                   </Paragraph>
                 </div>
@@ -216,15 +361,45 @@ export default function LuxeSchedule() {
                     </svg>
                   </div>
 
-                  <span className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]" />
+                  <span
+                    ref={(el) => {
+                      if (el && !circleTimeRefs.current.includes(el)) {
+                        circleTimeRefs.current.push(el);
+                      }
+                    }}
+                    className="mb-3 h-2 w-2 rounded-full border border-[#c6b397] bg-[#171511]"
+                  />
 
-                  <span className="ibm-heading text-2xl sm:text-[28px]">20:00</span>
+                  <span
+                    ref={(el) => {
+                      if (el && !timeRefs.current.includes(el)) {
+                        timeRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-heading text-2xl sm:text-[28px]"
+                  >
+                    20:00
+                  </span>
 
-                  <span className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs">
+                  <span
+                    ref={(el) => {
+                      if (el && !timeInfoRefs.current.includes(el)) {
+                        timeInfoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text-medium mt-2 text-[10px] uppercase tracking-[0.1em] text-[#c6b397] sm:text-xs"
+                  >
                     Торт
                   </span>
 
-                  <Paragraph className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45">
+                  <Paragraph
+                    paragraphRef={(el) => {
+                      if (el && !timeInfoTwoRefs.current.includes(el)) {
+                        timeInfoTwoRefs.current.push(el);
+                      }
+                    }}
+                    className="ibm-text mt-3 max-w-[150px] text-xs leading-relaxed text-white/45"
+                  >
                     Сладкий финал праздничного вечера
                   </Paragraph>
                 </div>
@@ -233,43 +408,11 @@ export default function LuxeSchedule() {
 
             {/* Декоративная фотография */}
 
-            <div className="relative min-h-[270px] overflow-hidden sm:min-h-[360px] lg:min-h-[390px]">
-              {/* Заглушка банкетного стола */}
+            <div ref={ourDayRef} className="relative min-h-[270px] overflow-hidden sm:min-h-[360px] lg:min-h-[390px]">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171511] via-transparent to-[#171511]/50" />
 
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_65%_30%,#a18b70_0%,#594633_35%,#211c15_75%)]" />
-
-              {/* Свечи */}
-
-              <div className="absolute inset-0 flex items-end justify-center gap-5 pb-20 sm:gap-8 sm:pb-24">
-                <div className="relative h-24 w-2 bg-gradient-to-r from-[#c5b294] via-[#f4e8d2] to-[#a99579] sm:h-32">
-                  <span className="absolute -top-5 left-1/2 h-5 w-2 -translate-x-1/2 rounded-full bg-[#f4d6a0]/70 blur-[4px]" />
-                </div>
-
-                <div className="relative h-36 w-2 bg-gradient-to-r from-[#c5b294] via-[#f4e8d2] to-[#a99579] sm:h-48">
-                  <span className="absolute -top-5 left-1/2 h-6 w-2 -translate-x-1/2 rounded-full bg-[#f4d6a0]/70 blur-[4px]" />
-                </div>
-
-                <div className="relative h-28 w-2 bg-gradient-to-r from-[#c5b294] via-[#f4e8d2] to-[#a99579] sm:h-40">
-                  <span className="absolute -top-5 left-1/2 h-5 w-2 -translate-x-1/2 rounded-full bg-[#f4d6a0]/70 blur-[4px]" />
-                </div>
-
-                <div className="relative h-20 w-2 bg-gradient-to-r from-[#c5b294] via-[#f4e8d2] to-[#a99579] sm:h-28">
-                  <span className="absolute -top-5 left-1/2 h-5 w-2 -translate-x-1/2 rounded-full bg-[#f4d6a0]/70 blur-[4px]" />
-                </div>
-              </div>
-
-              {/* Условный силуэт стола */}
-
-              <div className="absolute bottom-0 left-[-10%] right-[-10%] h-20 rotate-[-5deg] border-t border-[#d5c1a3]/30 bg-gradient-to-b from-[#756047] to-[#211b14] sm:h-28" />
-
-              {/* Затемнение */}
-
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171511] via-transparent to-[#171511]/25" />
-
-              {/* Подпись поверх заглушки */}
-
-              <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8">
-                <Paragraph className="ibm-text-medium text-[9px] uppercase tracking-[0.2em] text-[#c6b397]">
+              <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 [text-shadow:1px_2px_5px_rgba(0,0,0,0.9)]">
+                <Paragraph className="ibm-text-medium text-[9px] uppercase tracking-[0.2em] text-white">
                   Наш особенный день
                 </Paragraph>
 
@@ -283,8 +426,6 @@ export default function LuxeSchedule() {
               </div>
             </div>
           </div>
-
-          {/* Нижняя подпись */}
 
           <div className="mt-12 flex items-center gap-4 border-t border-white/15 pt-6 sm:mt-16 sm:pt-8">
             <span className="h-px w-10 bg-[#a99579]/60" />
