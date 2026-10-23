@@ -1,6 +1,6 @@
 import React, { RefObject } from "react";
 interface ParagraphProp {
-  children: string;
+  children: React.ReactNode;
   className?: string;
   paragraphRef?: React.Ref<HTMLParagraphElement | null>;
 }

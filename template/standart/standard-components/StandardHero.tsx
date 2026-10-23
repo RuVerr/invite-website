@@ -195,7 +195,7 @@ export default function StandardHero({ data }: StandardHeroProp) {
                         </span>
                       </Heading>
                       <div className="ibm-text-medium mt-6 space-y-1.5 text-[7px] uppercase tracking-[0.22em] text-white/80 sm:mt-7 sm:text-[8px] sm:tracking-[0.26em] md:mt-8 md:text-[13px] md:tracking-[0.3em]">
-                        <p>
+                        <div>
                           <span
                             ref={(el) => {
                               if (el && !headingRefs.current.includes(el)) {
@@ -223,8 +223,8 @@ export default function StandardHero({ data }: StandardHeroProp) {
                           >
                             {data.heroHeading.heroHeadingDateTime.year}
                           </span>
-                        </p>
-                        <p>
+                        </div>
+                        <div>
                           <span
                             ref={(el) => {
                               if (el && !headingRefs.current.includes(el)) {
@@ -241,7 +241,7 @@ export default function StandardHero({ data }: StandardHeroProp) {
                           >
                             {data.heroHeading.heroHeadingLocation.country}
                           </span>
-                        </p>
+                        </div>
                       </div>
                     </div>
                   </div>

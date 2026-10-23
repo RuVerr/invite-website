@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "HRAVIRAT — Digital Invitations",
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
